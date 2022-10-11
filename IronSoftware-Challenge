@@ -1,0 +1,305 @@
+using System;
+
+namespace OGPhonePad_IronSoftware
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StartApp();
+
+        }
+
+        public static void StartApp()
+        {
+            Console.WriteLine("Enter the coded keypad message you want to send:");
+            string input;
+            input = Console.ReadLine();
+
+            string displayMessage = OldPhonePad1(input);
+
+            Console.WriteLine($"Your message is: {displayMessage}");
+            Console.WriteLine("\n");
+            Console.WriteLine("\n"); Console.WriteLine("Go again? Y/N");
+            string goAgain = Console.ReadLine();
+
+            if (goAgain.ToUpper() == "Y")
+            {
+                StartApp();
+            }
+
+            return;
+        }
+
+
+
+        public static string OldPhonePad1(string input)
+        {
+            string message = "";
+            while (input.Length > 0)                    //if the input still has characters, keep going.
+            {
+
+                switch (input)
+                {
+                    case string s when s.StartsWith(" "):
+                        input = input.Remove(0, 1);
+                        break;
+                    case string s when s.StartsWith("#")://is end of message
+                        return message;
+                    case string s when s.StartsWith("*")://removes last character from the message
+                        message = message.Remove(message.Length-1,1);
+                        input = input.Remove(0, 1);
+                        break;
+                    case string s when s.StartsWith("0")://adds space to message
+                        message += " ";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("222"): //catch the button press
+                        message += "C";                     //adds letter to the final message
+                        input = input.Remove(0,3);          //removes numbers that were already counted
+                        break;                              //returns to the top of the loop
+                    case string s when s.StartsWith("22"):
+                        message += "B";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("2"):
+                        message += "A";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("333"):
+                        message += "F";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("33"):
+                        message += "E";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("3"):
+                        message += "D";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("444"):
+                        message += "I";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("44"):
+                        message += "H";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("4"):
+                        message += "G";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("555"):
+                        message += "L";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("55"):
+                        message += "K";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("5"):
+                        message += "J";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("666"):
+                        message += "O";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("66"):
+                        message += "N";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("6"):
+                        message += "M";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("7777"):
+                        message += "S";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("777"):
+                        message += "R";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("77"):
+                        message += "Q";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("7"):
+                        message += "P";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("888"):
+                        message += "V";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("88"):
+                        message += "U";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("8"):
+                        message += "T";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    case string s when s.StartsWith("9999"):
+                        message += "Z";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("999"):
+                        message += "Y";
+                        input = input.Remove(0, 3);
+                        break;
+                    case string s when s.StartsWith("99"):
+                        message += "X";
+                        input = input.Remove(0, 2);
+                        break;
+                    case string s when s.StartsWith("9"):
+                        message += "W";
+                        input = input.Remove(0, 1);
+                        break;
+
+                    default:
+                        message += "Invalid character entry";
+                        return message;
+                }
+            }
+            return message;
+
+
+        }
+
+
+        public static string OldPhonePad2(string input)
+        {
+            string message = "";
+
+
+            string[][] jaggedArray =
+            {
+                new string[] {" "},
+                new string[] {"*"},
+                new string[] { "a", "b", "c" },
+                new string[] { "d", "e", "f" },
+                new string[] { "g", "h", "i" },
+                new string[] { "j", "k", "l" },
+                new string[] { "m", "n", "o" },
+                new string[] { "p", "q", "r", "s" },
+                new string[] { "t", "u", "v" },
+                new string[] { "w", "x", "y", "z" }
+            };
+
+            for (int point = 0; point < input.Length; point++)
+            {
+                point = 0;
+                int character = 0;
+                char c = input[point];
+
+                if (input[point].ToString() == "#") // is it time to send?
+                {
+                    message += "";
+                    return message;
+                }
+                else if (input.Length >=4 && input[point+1].ToString() != "#" && input[point + 2].ToString() != "#" && input[point + 3].ToString() != "#")
+                {
+                    if (input[point] == input[point + 1] && input[point] == input[point + 2] && input[point] == input[point + 3])
+                    {
+                        character = character + 3;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 4);
+                    }
+                    else if (input[point] == input[point + 1] && input[point] == input[point + 2]) //was point pressed thrice?
+                    {
+                        character = character + 2;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 3);
+                    }
+                    else if (input[point] == input[point + 1]) // was point pressed twice?
+                    {
+                        character = character + 1;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 2);
+                    }
+                    else //point only pressed once
+                    {
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 1);
+                    }
+                }
+                else if (input.Length >= 3 && input[point + 1].ToString() != "#" && input[point + 2].ToString() != "#")
+                {
+                    if (input[point] == input[point + 1] && input[point] == input[point + 2]) //was point pressed thrice?
+                    {
+                        character = character + 2;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 3);
+                    }
+                    else if (input[point] == input[point + 1]) // was point pressed twice?
+                    {
+                        character = character + 1;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 2);
+                    }
+                    else //point only pressed once
+                    {
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 1);
+                    }
+                }
+
+
+
+
+                else if (input[point + 1].ToString() == "#") // is pattern two or less characters?
+                {
+                    int number = c - '0'; // convert char to int
+                    message += jaggedArray[number][character];
+                    input = input.Remove(0, 1);
+                }
+                else if (input[point + 2].ToString() == "#") // is pattern three or less characters?
+                {
+                    if (input[point] == input[point + 1] && input[point] == input[point + 2]) //was point pressed thrice?
+                    {
+                        character = character + 2;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 3);
+                    }
+                    else if (input[point] == input[point + 1]) // was point pressed twice?
+                    {
+                        character = character +1;
+                        int number = c - '0';
+                        message += jaggedArray[number][character];
+                        input = input.Remove(0, 2);
+                    }
+                    else //point only pressed once
+                    {
+                        message += jaggedArray[point][character];
+                        input = input.Remove(0, 1);
+                    }
+                }
+                else if (input[point + 3].ToString() == "#") // is pattern four or less characters?
+                {
+
+                }
+            }
+
+            return message;
+        }
+    }
+}
