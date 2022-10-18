@@ -1,0 +1,117 @@
+// Solution to challenge on LeetCode.com
+// https://leetcode.com/problems/roman-to-integer/
+//
+// Given a roman numeral, convert it to an integer.
+
+        public static int ReadingRomanNums(string s)
+        {
+            //inside contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M')
+            int number = 0;
+            while (s.Length > 0)                    //if the s still has characters, keep going.
+            {
+
+                switch (s)
+                {
+
+
+                    case string inside when inside.StartsWith("CM"):
+                        number += 900;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("M"):
+                        number += 1000;
+                        s = s.Remove(0, 1);
+                        break;
+                    case string inside when inside.StartsWith("CD"):
+                        number += 400;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("D"):
+                        number += 500;
+                        s = s.Remove(0, 1);
+                        break;
+                    case string inside when inside.StartsWith("XC"):
+                        number += 90;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("C"):
+                        number += 100;
+                        s = s.Remove(0, 1);
+                        break;
+                    case string inside when inside.StartsWith("XL"):
+                        number += 40;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("L"):
+                        number += 50;
+                        s = s.Remove(0, 1);
+                        break;
+
+                    case string inside when inside.StartsWith("XIII"):
+                        number += 13;
+                        s = s.Remove(0, 4);
+                        break;
+                    case string inside when inside.StartsWith("XII"):
+                        number += 12;
+                        s = s.Remove(0, 3);
+                        break;
+                    case string inside when inside.StartsWith("XXX"):
+                        number += 30;
+                        s = s.Remove(0, 3);
+                        break;
+                    case string inside when inside.StartsWith("XX"):
+                        number += 20;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("X"):
+                        number += 10;
+                        s = s.Remove(0, 1);
+                        break;
+                    case string inside when inside.StartsWith("IX"):
+                        number += 9;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("VIII"):
+                        number += 8;
+                        s = s.Remove(0, 4);
+                        break;
+                    case string inside when inside.StartsWith("VII"):
+                        number += 7;
+                        s = s.Remove(0, 3);
+                        break;
+                    case string inside when inside.StartsWith("VI"):
+                        number += 6;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("V"):
+                        number += 5;
+                        s = s.Remove(0, 1);
+                        break;
+                    case string inside when inside.StartsWith("IV"):
+                        number += 4;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("XI"):
+                        number += 11;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("III"):
+                        number += 3;
+                        s = s.Remove(0, 3);
+                        break;
+                    case string inside when inside.StartsWith("II"):
+                        number += 2;
+                        s = s.Remove(0, 2);
+                        break;
+                    case string inside when inside.StartsWith("I"):
+                        number += 1;
+                        s = s.Remove(0, 1);
+                        break;
+                    default:
+                        number += 0;
+                        break;
+                }
+
+            }
+            return number;
+        }
